@@ -24,10 +24,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode production",
+    "build": "echo 'Starting build...' && vite build --mode production && echo 'Build completed successfully'",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "netlify-build": "echo 'Starting Netlify build...' && npm install --legacy-peer-deps && npm run build",
+    "debug:build": "set -x && npm install --legacy-peer-deps && npm run build"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
