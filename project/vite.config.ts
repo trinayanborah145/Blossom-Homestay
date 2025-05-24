@@ -6,13 +6,13 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   base: '/',
-  root: resolve(__dirname, './'),
+  root: __dirname,
   publicDir: 'public',
   resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '~': resolve(__dirname, 'node_modules')
-    }
+    alias: [
+      { find: '@', replacement: resolve(__dirname, 'src') },
+      { find: '~', replacement: resolve(__dirname, 'node_modules') }
+    ]
   },
   define: {
     'process.env': {},
