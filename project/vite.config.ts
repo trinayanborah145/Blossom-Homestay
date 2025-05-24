@@ -1,13 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    nodePolyfills({
+      // To exclude specific polyfills, add them here
+      exclude: [
+        'fs', // Excludes the polyfill for `fs` and `node:fs`.
+      ],
+      // Whether to polyfill `node:` protocol imports.
+      protocolImports: true,
+    }),
+  ],
   base: '/',
   define: {
-    'process.env': {}
+    'process.env': {},
+    global: 'globalThis',
   },
   resolve: {
     alias: [
@@ -17,16 +29,8 @@ export default defineConfig({
       },
       // Handle Node.js built-in modules
       {
-        find: 'fs',
-        replacement: 'unenv/runtime/node/empty',
-      },
-      {
         find: 'path',
         replacement: 'path-browserify',
-      },
-      {
-        find: 'crypto',
-        replacement: 'crypto-browserify',
       },
       {
         find: 'stream',
@@ -66,7 +70,13 @@ export default defineConfig({
       'react-dom',
       'path-browserify',
       'crypto-browserify',
-      'stream-browserify'
+      'stream-browserify',
+      'buffer',
+      'process',
+      'assert',
+      'stream-http',
+      'https-browserify',
+      'url'
     ]
   },
   server: {
