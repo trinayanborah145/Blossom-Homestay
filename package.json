@@ -4,12 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/index.html",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": "18.20.2",
+    "npm": "9.8.1"
   },
   "scripts": {
     "dev": "vite",
@@ -17,7 +15,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "prebuild": "rimraf -rf dist",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "postinstall": "vite build"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -44,7 +43,8 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",
-    "vite-plugin-node-polyfills": "^0.17.0"
+    "vite-plugin-node-polyfills": "^0.17.0",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "browser": {
     "fs": false,
