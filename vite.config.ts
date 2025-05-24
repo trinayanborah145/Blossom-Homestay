@@ -1,28 +1,26 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  root: __dirname,
   base: '/',
-  root: path.resolve(__dirname, './'),
   publicDir: 'public',
+  plugins: [react()],
   resolve: {
-    alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
-      { find: '~', replacement: path.resolve(__dirname, 'node_modules') }
-    ]
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '~': resolve(__dirname, 'node_modules')
+    }
   },
   css: {
     modules: {
-      localsConvention: 'camelCaseOnly',
-    },
+      localsConvention: 'camelCaseOnly'
+    }
   },
   define: {
     'process.env': {},
-    global: 'window',
-    'import.meta.env.BUILD_VERSION': JSON.stringify(process.env.BUILD_VERSION || 'dev')
+    global: 'window'
   },
   build: {
     outDir: 'dist',
@@ -30,23 +28,16 @@ export default defineConfig({
     sourcemap: false,
     minify: 'esbuild',
     target: 'esnext',
-    modulePreload: {
-      polyfill: true
-    },
     rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
+      input: resolve(__dirname, 'index.html'),
       output: {
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash][extname]',
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom']
-        }
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]'
       }
     },
     commonjsOptions: {
-      transformMixedEsModules: true,
-      include: /node_modules/
+      transformMixedEsModules: true
     },
     chunkSizeWarningLimit: 1000
   },
@@ -60,13 +51,8 @@ export default defineConfig({
     include: [
       'react',
       'react-dom',
-      'react-router-dom'
-    ],
-    esbuildOptions: {
-      // Node.js global to browser globalThis
-      define: {
-        global: 'globalThis'
-      }
-    }
+      'react-router-dom',
+      'lucide-react'
+    ]
   }
 });
