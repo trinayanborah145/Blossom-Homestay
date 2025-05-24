@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "description": "Root configuration for Blossom Homestay",
   "scripts": {
+    "prebuild": "npm install",
     "build": "cd project && npm install --legacy-peer-deps && npm run build",
     "clean": "rimraf project/node_modules project/dist",
-    "postinstall": "cd project && npm install --legacy-peer-deps"
+    "postinstall": "cd project && npm install --legacy-peer-deps",
+    "netlify-build": "npm install && npm run build"
   },
   "workspaces": [
     "project"
@@ -16,5 +18,8 @@
     "npm": ">=8.0.0"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "packageManager": "npm@8.19.4"
 }

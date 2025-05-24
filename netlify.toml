@@ -1,8 +1,8 @@
 [build]
-  base = "project"
+  base = "."
   publish = "project/dist"
   command = "npm run netlify-build"
-
+  
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
