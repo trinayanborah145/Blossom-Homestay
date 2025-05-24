@@ -8,13 +8,52 @@
   NPM_FLAGS = "--legacy-peer-deps"
   NODE_OPTIONS = "--openssl-legacy-provider --max-old-space-size=4096"
   CI = "false"
+  NETLIFY_USE_YARN = "false"
+  YARN_VERSION = "1.22.22"
 
 # Configure build plugins
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
-# Configure build settings
+# Cache configuration
+[[plugins]]
+  package = "@netlify/plugin-cache"
+  [plugins.inputs]
+    paths = [
+      "project/node_modules/.cache",
+      "project/node_modules/.vite",
+      "project/.svelte-kit",
+      "project/.cache",
+      "project/.next",
+      "project/.yarn/cache"
+    ]
+
+# Build settings
 [build.lifecycle]
   onBuild = "echo 'Starting build...'"
   onSuccess = "echo 'Build succeeded!'"
   onError = "echo 'Build failed!'"
+
+# Configure build optimization
+[build.optimization]
+  bundle = true
+  minify = true
+  target = ["es2020", "edge88", "firefox78", "chrome87", "safari14"]
+
+# Configure build processing
+[build.processing]
+  skip_processing = false
+
+# Configure build publish
+[build.publish]
+  ignore = "git-cache|node_modules|.netlify|.vscode|.github|.git"
+
+# Configure build headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https:;"
