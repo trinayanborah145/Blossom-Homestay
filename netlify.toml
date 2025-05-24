@@ -1,10 +1,11 @@
 [build]
-  base = "project"
-  publish = "dist"
-  command = "npm install && npm run build"
+  base = "."
+  publish = "project/dist"
+  command = "cd project && npm install && npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 [[redirects]]
   from = "/*"
