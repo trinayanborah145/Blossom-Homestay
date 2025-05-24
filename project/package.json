@@ -13,13 +13,14 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "echo \"[Project] Running TypeScript type checking...\" && tsc --noEmit && echo \"[Project] Building with Vite...\" && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prebuild": "rimraf dist",
-    "postinstall": "npm run build",
-    "netlify-build": "npm install --legacy-peer-deps && npm run build",
-    "check-types": "tsc --noEmit"
+    "prebuild": "echo \"[Project] Cleaning previous build...\" && rimraf dist",
+    "postinstall": "echo \"[Project] Running postinstall...\" && npm run build",
+    "netlify-build": "echo \"[Project] Running Netlify build...\" && npm install --legacy-peer-deps && npm run build",
+    "check-types": "tsc --noEmit",
+    "test": "echo \"[Project] No tests specified\" && exit 0"
   },
   "dependencies": {
     "react": "^18.2.0",
