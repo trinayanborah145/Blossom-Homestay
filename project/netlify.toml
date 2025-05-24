@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18.20.2"
+  NPM_VERSION = "9.8.1"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--openssl-legacy-provider --max-old-space-size=4096"
+  NPM_CONFIG_LOGLEVEL = "info"
