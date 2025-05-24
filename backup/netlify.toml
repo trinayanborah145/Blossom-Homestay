@@ -1,0 +1,15 @@
+[build]
+  command = "cd project && npm install --legacy-peer-deps && npm run build"
+  publish = "project/dist"
+  base = "."
+
+[dev]
+  command = "cd project && npm run dev"
+  port = 3000
+  publish = "project/dist"
+  targetPort = 3000
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

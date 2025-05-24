@@ -1,15 +1,19 @@
 [build]
-  command = "cd project && npm install --legacy-peer-deps && npm run build"
-  publish = "project/dist"
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "dist"
   base = "."
 
 [dev]
-  command = "cd project && npm run dev"
+  command = "npm run dev"
   port = 3000
-  publish = "project/dist"
+  publish = "dist"
   targetPort = 3000
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"

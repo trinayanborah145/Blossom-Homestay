@@ -1,0 +1,19 @@
+{
+  "name": "blossom-homestay-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Root configuration for Blossom Homestay",
+  "scripts": {
+    "build": "cd project && npm install --legacy-peer-deps && npm run build",
+    "dev": "cd project && npm run dev",
+    "clean": "rimraf project/node_modules project/dist",
+    "postinstall": "cd project && npm install"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "dependencies": {
+    "rimraf": "^5.0.5"
+  }
+}
