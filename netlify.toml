@@ -1,28 +1,7 @@
 [build]
-  base = "."
+  base = "project"
   publish = "project/dist"
-  command = "npm run netlify-build"
-
-[build.environment]
-  # Node.js version (LTS version)
-  NODE_VERSION = "18.20.2"
-  NPM_VERSION = "9.8.1"
-  
-  # Build settings
-  CI = "false"
-  NODE_ENV = "production"
-  
-  # Package manager settings
-  NPM_FLAGS = "--legacy-peer-deps"
-  NODE_OPTIONS = "--openssl-legacy-provider --max-old-space-size=4096"
-  
-  # Build optimizations
-  NODE_VERBOSE = "true"
-  NPM_CONFIG_LOGLEVEL = "info"
-  
-  # Vite specific
-  VITE_APP_VERSION = "1.0.0"
-  VITE_APP_BUILD_TIME = "2025-05-24T14:22:17.000Z"
+  command = "cd project && npm install --legacy-peer-deps && npm run build"
 
 # Configure build plugins
 # Configure build plugins
