@@ -10,9 +10,14 @@ export default defineConfig({
   publicDir: 'public',
   resolve: {
     alias: [
-      { find: '@', replacement: path.resolve(__dirname, './src') },
-      { find: '~', replacement: path.resolve(__dirname, './node_modules') }
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      { find: '~', replacement: path.resolve(__dirname, 'node_modules') }
     ]
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
   },
   define: {
     'process.env': {},
@@ -24,6 +29,10 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: false,
     minify: 'esbuild',
+    target: 'esnext',
+    modulePreload: {
+      polyfill: true
+    },
     rollupOptions: {
       input: path.resolve(__dirname, 'index.html'),
       output: {
