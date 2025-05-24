@@ -1,5 +1,5 @@
 [build]
-  base = "."
+  base = "./project"
   publish = "dist"
   command = "npm install --legacy-peer-deps && npm run build"
 
