@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { fileURLToPath, URL } from 'url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   base: '/',
-  root: '.',
+  root: fileURLToPath(new URL('.', import.meta.url)),
   publicDir: 'public',
   resolve: {
     alias: [
-      { find: '@', replacement: resolve(__dirname, 'src') },
-      { find: '~', replacement: resolve(__dirname, 'node_modules') }
+      { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
+      { find: '~', replacement: fileURLToPath(new URL('./node_modules', import.meta.url)) }
     ]
   },
   define: {
@@ -25,7 +25,7 @@ export default defineConfig({
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
-      input: 'index.html',
+      input: fileURLToPath(new URL('index.html', import.meta.url)),
       output: {
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',

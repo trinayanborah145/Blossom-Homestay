@@ -1,23 +1,13 @@
 [build]
-  base = "project"
-  publish = "project/dist"
+  base = "."
+  publish = "dist"
   command = "npm install --legacy-peer-deps && npm run build"
-  working_directory = "project"
-
-# Configure build plugins
-# Configure build plugins
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
 
 # Configure redirects for SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Cache configuration
-[[plugins]]
-  package = "@netlify/plugin-cache"
   [plugins.inputs]
     paths = [
       "project/node_modules/.cache",
