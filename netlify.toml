@@ -1,7 +1,8 @@
 [build]
   base = "project"
   publish = "project/dist"
-  command = "cd project && npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run build"
+  working_directory = "project"
 
 # Configure build plugins
 # Configure build plugins

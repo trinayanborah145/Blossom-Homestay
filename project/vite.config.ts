@@ -6,12 +6,12 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   base: '/',
-  root: process.cwd(),
+  root: '.',
   publicDir: 'public',
   resolve: {
     alias: [
-      { find: '@', replacement: resolve(process.cwd(), 'src') },
-      { find: '~', replacement: resolve(process.cwd(), 'node_modules') }
+      { find: '@', replacement: resolve(__dirname, 'src') },
+      { find: '~', replacement: resolve(__dirname, 'node_modules') }
     ]
   },
   define: {
@@ -25,7 +25,7 @@ export default defineConfig({
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
-      input: resolve(process.cwd(), 'index.html'),
+      input: 'index.html',
       output: {
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',

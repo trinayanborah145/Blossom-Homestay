@@ -5,7 +5,8 @@
   "description": "Root configuration for Blossom Homestay",
   "scripts": {
     "build": "cd project && npm install --legacy-peer-deps && npm run build",
-    "clean": "rimraf project/node_modules project/dist"
+    "clean": "rimraf project/node_modules project/dist",
+    "postinstall": "cd project && npm install"
   },
   "engines": {
     "node": "18.20.2",
