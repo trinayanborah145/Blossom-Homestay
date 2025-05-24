@@ -6,10 +6,19 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  root: '.',
+  publicDir: 'public',
   resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src')
-    }
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(__dirname, 'src')
+      },
+      {
+        find: /^~(.+)/,
+        replacement: '$1'
+      }
+    ]
   },
   define: {
     'process.env': {},
@@ -20,15 +29,22 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html')
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom']
         }
       }
+    },
+    commonjsOptions: {
+      transformMixedEsModules: true
     }
   },
   server: {
     port: 3000,
-    open: true
+    open: true,
+    host: true
   }
 });
