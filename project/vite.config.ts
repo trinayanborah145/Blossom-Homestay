@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   base: '/',
   define: {
@@ -61,4 +62,27 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
-});
+  // Production specific settings
+  ...(mode === 'production' && {
+    base: '/',
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: false,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+          },
+        },
+      },
+    },
+  }),
+}));

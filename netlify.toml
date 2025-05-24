@@ -1,11 +1,12 @@
 [build]
   base = "."
   publish = "project/dist"
-  command = "cd project && npm install && npm run build"
+  command = "cd project && npm install --legacy-peer-deps && npm run build"
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[redirects]]
   from = "/*"
